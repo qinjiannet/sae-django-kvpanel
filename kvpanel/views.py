@@ -14,14 +14,10 @@ def index(request):
 	limit = request.GET.get('limit',20)
 	prev_marker = request.GET.get('prev_marker','')
 	marker = str(request.GET.get('marker',''))
-	if not len(prev_marker):
-		prev_marker = None
 	results = list(kv.get_by_prefix(str(prefix),int(limit),marker))
 	if results and len(results):
 		marker = results[-1][0]
 	#results = [('test','test'),('test2','test2')]
-	if prev_marker is None:
-		prev_marker = ''
 	return render_to_response('kvpanel/index.html', {'kv_info':kv_info,'results':results,'prefix':prefix,'pre_marker':prev_marker,'marker':marker,'path':path,'limit':limit}, context_instance=RequestContext(request))
 
 def set(request):
