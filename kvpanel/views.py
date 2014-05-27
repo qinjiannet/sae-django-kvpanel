@@ -14,7 +14,7 @@ def index(request):
 	limit = request.GET.get('limit',20)
 	prev_marker = request.GET.get('prev_marker','')
 	marker = str(request.GET.get('marker',''))
-	results = list(kv.get_by_prefix(str(prefix),int(limit),marker))
+	results = list(kv.get_by_prefix(str(prefix),limit=int(limit),marker=marker))
 	if results and len(results):
 		marker = results[-1][0]
 	#results = [('test','test'),('test2','test2')]
